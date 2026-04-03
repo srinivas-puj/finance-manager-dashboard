@@ -219,10 +219,16 @@ body {
   .header-controls {
     width: 100%;
     flex-direction: column;
+    align-items: stretch;
   }
 
   .back-button {
     width: 100%;
+  }
+
+  .theme-toggle-button {
+    width: 100%;
+    justify-content: center;
   }
   
   .app-main {
