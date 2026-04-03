@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   height: 200px;
-  color: #999;
+  color: var(--text-muted);
   font-style: italic;
 }
 
@@ -23,7 +23,7 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.85rem;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .legend-dot {
@@ -84,8 +84,8 @@
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: #333;
-  color: white;
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.7rem;
@@ -102,7 +102,7 @@
 .bar-chart__label {
   margin-top: 0.5rem;
   font-size: 0.8rem;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 /* Spending Breakdown */
@@ -148,12 +148,12 @@
   display: block;
   font-size: 1rem;
   font-weight: 700;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .donut-label {
   font-size: 0.75rem;
-  color: #999;
+  color: var(--text-muted);
 }
 
 .category-list {
@@ -168,7 +168,7 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 0;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid var(--border-color-soft);
 }
 
 .category-item:last-child {
@@ -185,18 +185,18 @@
 .category-name {
   flex: 1;
   font-size: 0.85rem;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .category-amount {
   font-weight: 600;
   font-size: 0.85rem;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .category-percentage {
   font-size: 0.8rem;
-  color: #999;
+  color: var(--text-muted);
   min-width: 45px;
   text-align: right;
 }

@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useReducer, useMemo } from 'react';
+import React, { createContext, useContext, useReducer, useMemo, useEffect, useCallback } from 'react';
 import { initialTransactions } from '../data/transactions';
+import { createTransaction, deleteTransaction as apiDeleteTransaction, fetchTransactions, updateTransaction as apiUpdateTransaction } from '../api/financeApi';
 
 const FinanceContext = createContext(null);
 
@@ -7,6 +8,9 @@ const financeReducer = (state, action) => {
   switch (action.type) {
     case 'SET_ROLE':
       return { ...state, currentRole: action.payload };
+
+    case 'SET_TRANSACTIONS':
+      return { ...state, transactions: action.payload };
     
     case 'ADD_TRANSACTION':
       return {
@@ -58,6 +62,74 @@ const initialState = {
 
 export const FinanceProvider = ({ children }) => {
   const [state, dispatch] = useReducer(financeReducer, initialState);
+
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || '';
+  const apiEnabled = Boolean(apiBaseUrl && apiBaseUrl.trim());
+
+  const normalizeTransactions = useCallback((txs) => {
+    if (!Array.isArray(txs)) return [];
+    return txs.map(t => ({
+      ...t,
+      amount: typeof t.amount === 'string' ? parseFloat(t.amount) : t.amount,
+    }));
+  }, []);
+
+  const refreshTransactions = useCallback(async () => {
+    if (!apiEnabled) return;
+    const data = await fetchTransactions();
+    dispatch({
+      type: 'SET_TRANSACTIONS',
+      payload: normalizeTransactions(data),
+    });
+  }, [apiEnabled, normalizeTransactions]);
+
+  useEffect(() => {
+    // Load transactions from the API (if configured).
+    refreshTransactions().catch((err) => {
+      // Keep the app usable with the initial in-memory data.
+      console.error('Failed to fetch transactions:', err);
+    });
+  }, [refreshTransactions]);
+
+  const addTransaction = async (transaction) => {
+    // Optimistic UI update for a snappy experience.
+    dispatch({ type: 'ADD_TRANSACTION', payload: transaction });
+    if (!apiEnabled) return;
+
+    try {
+      await createTransaction(transaction);
+      await refreshTransactions();
+    } catch (err) {
+      console.error('Failed to add transaction:', err);
+      await refreshTransactions().catch(() => {});
+    }
+  };
+
+  const updateTransaction = async (transaction) => {
+    dispatch({ type: 'UPDATE_TRANSACTION', payload: transaction });
+    if (!apiEnabled) return;
+
+    try {
+      await apiUpdateTransaction(transaction.id, transaction);
+      await refreshTransactions();
+    } catch (err) {
+      console.error('Failed to update transaction:', err);
+      await refreshTransactions().catch(() => {});
+    }
+  };
+
+  const deleteTransaction = async (id) => {
+    dispatch({ type: 'DELETE_TRANSACTION', payload: id });
+    if (!apiEnabled) return;
+
+    try {
+      await apiDeleteTransaction(id);
+      await refreshTransactions();
+    } catch (err) {
+      console.error('Failed to delete transaction:', err);
+      await refreshTransactions().catch(() => {});
+    }
+  };
 
   const filteredTransactions = useMemo(() => {
     let result = [...state.transactions];
@@ -114,7 +186,12 @@ export const FinanceProvider = ({ children }) => {
     filteredTransactions,
     financialSummary,
     dispatch,
-    isAdmin: state.currentRole === 'admin'
+    isAdmin: state.currentRole === 'admin',
+    apiEnabled,
+    refreshTransactions,
+    addTransaction,
+    updateTransaction,
+    deleteTransaction
   };
 
   return (

@@ -15,12 +15,12 @@
 
 .empty-state-title {
   font-size: 1.25rem;
-  color: #333;
+  color: var(--text-primary);
   margin: 0 0 0.5rem;
 }
 
 .empty-state-description {
-  color: #666;
+  color: var(--text-secondary);
   margin: 0 0 1.5rem;
   max-width: 300px;
 }

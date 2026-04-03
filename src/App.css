@@ -6,9 +6,51 @@
 
 :root {
   --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
   --bg-color: #f8f9fc;
+  --surface: #ffffff;
+  --surface-alt: #fafafa;
+  --surface-muted: #f5f5f5;
+
   --text-primary: #1a1a2e;
   --text-secondary: #666;
+  --text-muted: #888;
+
+  --border-color: #e0e0e0;
+  --border-color-soft: #eee;
+
+  --shadow-card: rgba(0, 0, 0, 0.08);
+
+  --scrollbar-track: #f1f1f1;
+  --scrollbar-thumb: #ccc;
+  --scrollbar-thumb-hover: #bbb;
+
+  --tooltip-bg: #333;
+  --tooltip-text: #fff;
+}
+
+.theme-dark {
+  --bg-color: #0f1222;
+
+  --surface: #15192f;
+  --surface-alt: #1b2040;
+  --surface-muted: #20264a;
+
+  --text-primary: #e9e9f0;
+  --text-secondary: #b4b4c0;
+  --text-muted: #eaeaf3;
+
+  --border-color: rgba(255, 255, 255, 0.12);
+  --border-color-soft: rgba(255, 255, 255, 0.08);
+
+  --shadow-card: rgba(0, 0, 0, 0.35);
+
+  --scrollbar-track: rgba(255, 255, 255, 0.06);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.18);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.28);
+
+  --tooltip-bg: rgba(0, 0, 0, 0.75);
+  --tooltip-text: #fff;
 }
 
 body {
@@ -82,6 +124,38 @@ body {
   transform: translateX(-1px);
 }
 
+.theme-toggle-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-toggle-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.landing-wrapper {
+  position: relative;
+}
+
+.landing-theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
+
 .app-main {
   flex: 1;
   max-width: 1400px;
@@ -115,11 +189,11 @@ body {
 }
 
 .app-footer {
-  background: white;
+  background: var(--surface);
   padding: 1.5rem;
   text-align: center;
   color: var(--text-secondary);
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-color-soft);
 }
 
 @media (max-width: 1024px) {
@@ -172,16 +246,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #bbb;
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* Focus styles for accessibility */

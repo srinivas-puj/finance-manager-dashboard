@@ -11,7 +11,7 @@
   gap: 1rem;
   padding: 1.5rem;
   border-radius: 16px;
-  background: white;
+  background: var(--surface);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -50,7 +50,7 @@
 
 .summary-card__label {
   font-size: 0.875rem;
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 0.25rem;
 }
 

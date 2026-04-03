@@ -1,7 +1,7 @@
 .transaction-filters {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-color-soft);
 }
 
 .filters-row {
@@ -19,10 +19,12 @@
 .filter-search {
   width: 100%;
   padding: 0.6rem 1rem;
-  border: 2px solid #e8e8e8;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 0.9rem;
   transition: border-color 0.2s;
+  color: var(--text-primary);
+  background: var(--surface);
 }
 
 .filter-search:focus {
@@ -33,17 +35,23 @@
 .filter-select {
   width: 100%;
   padding: 0.6rem 1rem;
-  border: 2px solid #e8e8e8;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 0.9rem;
-  background: white;
+  background: var(--surface);
   cursor: pointer;
+  color: var(--text-primary);
   transition: border-color 0.2s;
 }
 
 .filter-select:focus {
   outline: none;
   border-color: #667eea;
+}
+
+.filter-select option {
+  background: var(--surface);
+  color: var(--text-primary);
 }
 
 .filter-reset {

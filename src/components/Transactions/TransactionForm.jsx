@@ -6,7 +6,7 @@ import Button from '../Common/Button';
 import './TransactionForm.css';
 
 const TransactionForm = ({ transaction, onClose }) => {
-  const { dispatch } = useFinance();
+  const { addTransaction, updateTransaction } = useFinance();
   const isEditing = Boolean(transaction);
 
   const [formData, setFormData] = useState({
@@ -59,7 +59,7 @@ const TransactionForm = ({ transaction, onClose }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!validate()) return;
@@ -73,10 +73,11 @@ const TransactionForm = ({ transaction, onClose }) => {
       date: formData.date
     };
 
-    dispatch({
-      type: isEditing ? 'UPDATE_TRANSACTION' : 'ADD_TRANSACTION',
-      payload: transactionData
-    });
+    if (isEditing) {
+      await updateTransaction(transactionData);
+    } else {
+      await addTransaction(transactionData);
+    }
 
     onClose();
   };

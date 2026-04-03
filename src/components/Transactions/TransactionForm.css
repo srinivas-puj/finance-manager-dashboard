@@ -13,16 +13,18 @@
 .form-label {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .form-input {
   padding: 0.75rem;
   font-size: 1rem;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-family: inherit;
   transition: border-color 0.2s;
+  color: var(--text-primary);
+  background: var(--surface);
 }
 
 .form-input:focus {
@@ -55,18 +57,24 @@
 
 .type-btn {
   padding: 0.75rem 1rem;
-  border: 2px solid #e0e0e0;
-  background: #fff;
+  border: 2px solid var(--border-color);
+  background: var(--surface);
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.2s;
+  color: var(--text-primary);
 }
 
 .type-btn:hover {
   border-color: #4ecdc4;
-  background: #f0fffe;
+  background: var(--surface-alt);
+}
+
+.form-input option {
+  background: var(--surface);
+  color: var(--text-primary);
 }
 
 .type-btn.active {
@@ -91,7 +99,7 @@
   gap: 1rem;
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--border-color);
 }
 
 @media (max-width: 640px) {

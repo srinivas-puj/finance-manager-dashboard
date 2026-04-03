@@ -19,12 +19,12 @@ const categoryIcons = {
 };
 
 const TransactionItem = ({ transaction, onEdit }) => {
-  const { isAdmin, dispatch } = useFinance();
+  const { isAdmin, deleteTransaction } = useFinance();
   const { id, date, description, amount, category, type } = transaction;
 
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this transaction?')) {
-      dispatch({ type: 'DELETE_TRANSACTION', payload: id });
+      deleteTransaction(id).catch(() => {});
     }
   };
 

@@ -6,6 +6,14 @@
   animation: fadeIn 0.8s ease-out forwards;
 }
 
+.theme-dark .landing-page {
+  background: linear-gradient(135deg, #0f1222 0%, #2a174d 100%);
+}
+
+.theme-dark .bg-shape {
+  opacity: 0.08;
+}
+
 .landing-page--visible {
   animation: fadeIn 0.8s ease-out forwards;
 }
